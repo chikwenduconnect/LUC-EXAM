@@ -1,0 +1,6 @@
+{
+  "name": "LUC Exam",
+  "description": "Premium modern examination workspace for LUC Hub & Academy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

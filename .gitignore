@@ -1,0 +1,11 @@
+node_modules/
+.next/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+lucexam/
+lucexam.zip
+supabase/.temp/
+tsconfig.tsbuildinfo
