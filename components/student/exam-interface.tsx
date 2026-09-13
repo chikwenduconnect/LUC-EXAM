@@ -157,7 +157,11 @@ export function ExamInterface({ exam, attemptId, questions, initialAnswers, init
   }
 
   if (showSubmitConfirm) {
-    const answeredCount = Object.keys(answers).length;
+    const answeredCount = questions.filter((q: any) =>
+      q.question_type === 'WRITTEN'
+        ? !!(writtenAnswers[q.id]?.trim())
+        : !!answers[q.id]
+    ).length;
     return (
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 max-w-md w-full text-center">
@@ -333,13 +337,21 @@ export function ExamInterface({ exam, attemptId, questions, initialAnswers, init
             >
               <ChevronLeft className="h-4 w-4 mr-2" /> Previous
             </Button>
-            <Button 
-              variant="default"
-              onClick={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))}
-              disabled={currentIndex === questions.length - 1}
-            >
-              Next <ChevronRight className="h-4 w-4 ml-2" />
-            </Button>
+            {currentIndex === questions.length - 1 ? (
+              <Button 
+                variant="default"
+                onClick={() => setShowSubmitConfirm(true)}
+              >
+                Submit Exam <CheckCircle2 className="h-4 w-4 ml-2" />
+              </Button>
+            ) : (
+              <Button 
+                variant="default"
+                onClick={() => setCurrentIndex(prev => Math.min(questions.length - 1, prev + 1))}
+              >
+                Next <ChevronRight className="h-4 w-4 ml-2" />
+              </Button>
+            )}
           </div>
         </div>
 
